@@ -214,7 +214,7 @@ window.addEventListener("DOMContentLoaded", async (event) => {
           /\d+$/g
         );
       if (event.target.value in playedNums) {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         const played = playedNums[event.target.value];
         try {
           const res = await fetch(`/mygames/${gameId}/played`, {

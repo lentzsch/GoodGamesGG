@@ -17,7 +17,6 @@ const Sequelize = require("sequelize");
 
 /*************************** ROUTER SETUP ***************************/
 const router = express.Router();
-
 /*************************** MIDDLEWARE ***************************/
 const userValidator = [
   check("firstName")
@@ -101,6 +100,7 @@ const consolePreference = async (req, user) => {
     await User_console.create({ userId: user.id, consoleId: 4 });
   }
 };
+
 /*************************** ROUTES ***************************/
 router.get(
   "/",

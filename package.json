@@ -36,12 +36,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jiezheng2020/GoodGamesGG.git"
+    "url": "git+https://github.com/lentzsch/GoodGamesGG.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jiezheng2020/GoodGamesGG/issues"
+    "url": "https://github.com/lentzsch/GoodGamesGG/issues"
   },
-  "homepage": "https://github.com/jiezheng2020/GoodGamesGG#readme"
+  "homepage": "https://github.com/lentzsch/GoodGamesGG#readme"
 }

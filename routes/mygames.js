@@ -215,7 +215,7 @@ router.post(
   asyncHandler(async (req, res) => {
     const userId = req.session.user.id;
     const { name } = req.body;
-    console.log(name);
+    // console.log(name);
 
     const library = await db.Library.create({ name, userId });
     // res.json({ library })
@@ -316,7 +316,7 @@ router.delete(
     const library = await db.Library.findByPk(libraryId);
     // console.log(library)
     const game = await db.Game.findByPk(gameId);
-    console.log(game);
+    // console.log(game);
     const libraryGame = await db.Library_game.findOne({
       where: {
         gameId: gameId,
@@ -341,7 +341,7 @@ router.delete(
   asyncHandler(async (req, res, next) => {
     const libraryId = parseInt(req.params.libraryId, 10);
     const library = await db.Library.findByPk(libraryId);
-    console.log(library);
+    // console.log(library);
     if (!library) {
       next(libraryNotFound(libraryId));
     } else {
