@@ -1,9 +1,15 @@
 "use strict";
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
+    options.tableName = "Library_games";
     return queryInterface.bulkInsert(
-      "Library_games",
+      options,
       [
         {
           gameId: 24,
@@ -107,6 +113,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Library_games", null, {});
+    options.tableName = "Library_games";
+    return queryInterface.bulkDelete(options, null, {});
   },
 };

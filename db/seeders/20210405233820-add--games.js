@@ -1,5 +1,10 @@
 "use strict";
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 const fetch = require("node-fetch");
 
 module.exports = {
@@ -355,10 +360,13 @@ module.exports = {
     });
 
     games.push(...newGames);
-    return queryInterface.bulkInsert("Games", games, {});
+
+    options.tableName = "Games";
+    return queryInterface.bulkInsert(options, games, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Games", null, {});
+    options.tableName = "Games";
+    return queryInterface.bulkDelete(options, null, {});
   },
 };

@@ -1,9 +1,15 @@
 "use strict";
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
+    options.tableName = "My_games";
     return queryInterface.bulkInsert(
-      "My_games",
+      options,
       [
         {
           played: 1,
@@ -116,6 +122,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("My_games", null, {});
+    options.tableName = "My_games";
+    return queryInterface.bulkDelete(options, null, {});
   },
 }

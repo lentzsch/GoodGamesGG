@@ -1,9 +1,14 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-
-      return queryInterface.bulkInsert('Consoles', [
+      options.tableName = "Consoles";
+      return queryInterface.bulkInsert(options, [
         { name: 'Playstation 4', createdAt: new Date(), updatedAt: new Date()},
         { name: 'Xbox One', createdAt: new Date(), updatedAt: new Date()},
         { name: 'PC', createdAt: new Date(), updatedAt: new Date()},
@@ -12,7 +17,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-
-      return queryInterface.bulkDelete('Consoles', null, {});
+      options.tableName = "Consoles";
+      return queryInterface.bulkDelete(options, null, {});
   }
 };

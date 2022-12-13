@@ -1,5 +1,10 @@
 "use strict";
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 const bcrypt = require("bcrypt");
 const faker = require("faker");
 
@@ -47,8 +52,8 @@ module.exports = {
       {
         firstName: "James",
         lastName: "Lentzsch",
-        userName: "FlyGuy69",
-        email: "James@castingcouch.ent",
+        userName: "FlyGuy72",
+        email: "James@casting.ent",
         hashedPassword: password,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -79,10 +84,12 @@ module.exports = {
       users.push(newUser);
     }
 
-    return queryInterface.bulkInsert("Users", users, {});
+    options.tableName = "Users"
+    return queryInterface.bulkInsert(options, users, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Users", null, {});
+    options.tableName = "Users"
+    return queryInterface.bulkDelete(options, null, {});
   },
 };

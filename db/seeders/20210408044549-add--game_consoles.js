@@ -4,6 +4,11 @@ const faker = require("faker");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const gameconsoles = [
@@ -140,10 +145,12 @@ module.exports = {
       gameconsoles.push(newGame);
     }
 
-    return queryInterface.bulkInsert("Game_consoles", gameconsoles, {});
+    options.tableName = "Game_consoles";
+    return queryInterface.bulkInsert(options, gameconsoles, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Game_consoles", null, {});
+    options.tableName = "Game_consoles";
+    return queryInterface.bulkDelete(options, null, {});
   },
 };

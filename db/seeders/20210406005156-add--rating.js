@@ -1,5 +1,10 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 const models = require('../models')
 const faker = require('faker');
 
@@ -27,10 +32,13 @@ module.exports = {
       };
       ratings.push(newRating);
     }
-    return queryInterface.bulkInsert('Ratings', ratings, {});
+
+    options.tableName = "Ratings";
+    return queryInterface.bulkInsert(options, ratings, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Ratings', null, {});
+    options.tableName = "Ratings";
+    return queryInterface.bulkDelete(options, null, {});
   }
 };
