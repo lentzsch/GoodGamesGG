@@ -33,7 +33,6 @@
     "start:development": "nodemon -r dotenv/config ./bin/www",
     "start:production": "node ./bin/www",
     "build": "node psql-setup-script.js",
-    "sequelize": "npm run sequelize",
     "sequelize-cli": "npm run sequelize-cli"
   },
   "repository": {
