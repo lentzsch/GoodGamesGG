@@ -164,7 +164,7 @@ router.get(
 router.get(
   "/authorized",
   asyncHandler(async (req, res) => {
-    if (req.session.user) {
+    if (req.session && req.session.user) {
       const userId = req.session.user.id;
       const userPreference = await User_console.findAll({
         where: userId,
