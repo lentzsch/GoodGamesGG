@@ -104,7 +104,7 @@ const consolePreference = async (req, user) => {
 /*************************** ROUTES ***************************/
 router.get(
   "/",
-  loginReq,
+  // loginReq,
   asyncHandler(async (req, res) => {
     const ps4Games = await Game.findAll({
       include: {
