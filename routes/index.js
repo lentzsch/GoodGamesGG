@@ -68,7 +68,7 @@ const userValidator = [
 ];
 
 const loginReq = (req, res, next) => {
-  if (req.session.user) {
+  if (req.session && req.session.user) {
     res.redirect("/authorized");
   } else {
     next();
