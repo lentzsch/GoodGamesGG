@@ -38,15 +38,15 @@ const libraryNotFound = (libraryId) => {
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
-    // console.log("test")
+
 
     const userId = req.session.user.id;
     const user = await db.User.findByPk(userId, {
       include: [{ model: db.Game, as: "user_mygames" }],
     });
-    // console.log(user)
+
     const { user_mygames: games } = user;
-    // console.log(games)
+
     const libraries = await db.Library.findAll({
       where: {
         userId: userId,
@@ -54,7 +54,6 @@ router.get(
     });
     const consoles = await db.Console.findAll();
 
-    // res.json({games})
     res.render("mygames", {
       req,
       title: "My Games",
@@ -62,32 +61,8 @@ router.get(
       libraries,
       consoles,
     });
-    // }
   })
 );
-
-// router.get('/all',
-//   asyncHandler(async (req, res, next) => {
-//     // console.log("test")
-
-//     const userId = 6
-//     const user = await db.User.findByPk(userId,
-//       {
-//         include: [{ model: db.Game, as: "user_mygames" }]
-//       })
-
-//     const { user_mygames: games } = user;
-//     // const libraries = await db.Library.findAll({
-//     //   where: {
-//     //     userId: userId
-//     //   }
-//     // })
-//     // const consoles = await db.Console.findAll()
-
-//     res.json({games})
-//     // res.render('mygames', { title: "My Games", games, libraries, consoles })
-//     // }
-//   }));
 
 router.get(
   "/:played(\\d)",
@@ -109,8 +84,6 @@ router.get(
     });
 
     const consoles = await db.Console.findAll();
-    // console.log(games)
-    // res.json({games})
     res.render("mygames", {
       req,
       title: "My Games",
@@ -121,50 +94,25 @@ router.get(
   })
 );
 
-// /mygames/ fetch for shelves
-// router.get('/libraries',
-//   asyncHandler(async (req, res) => {
-//     // const userId = parseInt(req.params.userId, 10);
-//     // const user = await db.User.findByPk(userId);
-//     // if (!user) {
-//     //   next(userNotFound(userId))
-//     // } else {
-//       const userId = 1
-//       const libraries = await db.Library.findAll({
-//           where: {
-//             userId: userId
-//           }
-//       })
-//       // console.log(libraries)
-//       // res.json({libraries})
-//     // }
-//     res.render('mygames', {libraries})
-// }));
-
 // get specific library
 router.get(
   "/libraries/:libraryId(\\d+)",
   asyncHandler(async (req, res) => {
-    // console.log("hi")
     const libraryId = parseInt(req.params.libraryId, 10);
     const userId = req.session.user.id;
     const library = await db.Library.findByPk(libraryId, {
       include: [{ model: db.Game, as: "library_games" }],
     });
-    // // console.log(library)
     const libraries = await db.Library.findAll({
       where: {
         userId: userId,
       },
     });
     const consoles = await db.Console.findAll();
-    // console.log(libraries)
     if (!library) {
       next(libraryNotFound(libreryId));
     } else {
       const { library_games: games } = library;
-      // console.log(games)
-      // res.json({games})
       res.render("mygames", {
         req,
         title: "My Games",
@@ -314,9 +262,9 @@ router.delete(
     const libraryId = parseInt(req.params.libraryId, 10);
     const gameId = parseInt(req.params.gameId, 10);
     const library = await db.Library.findByPk(libraryId);
-    // console.log(library)
+
     const game = await db.Game.findByPk(gameId);
-    // console.log(game);
+
     const libraryGame = await db.Library_game.findOne({
       where: {
         gameId: gameId,
@@ -341,7 +289,7 @@ router.delete(
   asyncHandler(async (req, res, next) => {
     const libraryId = parseInt(req.params.libraryId, 10);
     const library = await db.Library.findByPk(libraryId);
-    // console.log(library);
+    
     if (!library) {
       next(libraryNotFound(libraryId));
     } else {
