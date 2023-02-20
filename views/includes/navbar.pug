@@ -1,19 +1,18 @@
 if req
-	if req.session
-		if req.session.user
-			div.navheader
-				nav#authorizedUser
-					div.navbar
-						div.nav__logo
-							a(href='/') GoodGames
-						div.nav__games
-							a(href='/games') Games
-						div.nav__mygames
-							a(href='/mygames') My Games
-						div.nav__links
-							span.signup_link
-								form(action="/logout", method="post")
-									input(class='nav__logout' value='Logout' type="submit")
+	if req.session && req.session.user
+		div.navheader
+			nav#authorizedUser
+				div.navbar
+					div.nav__logo
+						a(href='/') GoodGames
+					div.nav__games
+						a(href='/games') Games
+					div.nav__mygames
+						a(href='/mygames') My Games
+					div.nav__links
+						span.signup_link
+							form(action="/logout", method="post")
+								input(class='nav__logout' value='Logout' type="submit")
 	else
 		div.navheader
 			nav#unauthorizedUser
