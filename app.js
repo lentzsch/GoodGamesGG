@@ -86,7 +86,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   const isProduction = process.env.NODE_ENV === "production";
   console.log("ERROR MESSAGE: ", err.message)
-  consol.log("ERROR OBJECT: ", err)
+  console.log("ERROR OBJECT: ", err)
   res.render("error", {
     title: "Server Error",
     message: err.message,
